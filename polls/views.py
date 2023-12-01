@@ -1,3 +1,4 @@
+from django.shortcuts import render
 from django.http import HttpResponse
 
 def read_file(filename):
@@ -6,3 +7,4 @@ def read_file(filename):
 
 def index(request):
     return HttpResponse(read_file("index.html"))
+
