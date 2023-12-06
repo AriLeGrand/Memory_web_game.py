@@ -9,8 +9,12 @@
     <body>
         {% comment %} <p>"{% static "css/style.css" %}"</p> {% endcomment %}
         <header>
+
+
             <div id="nav">
-                <img id="logo" src="https://i.ibb.co/b6DCGfb/DALL-E-2023-12-04-10-42-11-removebg-preview.png" alt="DALL-E-2023-12-04-10-42-11-removebg-preview" border="0">
+                <div id="nav_logo">
+                    <img id="logo" src="https://i.ibb.co/b6DCGfb/DALL-E-2023-12-04-10-42-11-removebg-preview.png" alt="DALL-E-2023-12-04-10-42-11-removebg-preview" border="0">
+                </div>
                 <div id="nav_plus">
                     <ul id="nav_g">
                         <li><a href="{% url 'home' %}">Home</a></li>
@@ -25,8 +29,9 @@
                         <li><a href="">Sign Up</a></li>
                     </ul>
                 </div>
-                <a href="admin"><img src="https://www.pngall.com/wp-content/uploads/5/Profile-PNG-Free-Download.png"></a>
             </div>
+
+
         </header>
     </body>
 </html>
