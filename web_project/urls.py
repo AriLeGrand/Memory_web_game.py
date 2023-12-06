@@ -21,4 +21,5 @@ urlpatterns = [
     # path('admin/', admin.site.urls),
     path("", include("Myapp.urls")),
     path("", include("profils.urls")),
+    path("", include("memory.urls")),
 ]

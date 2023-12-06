@@ -1,0 +1,209 @@
+{%load static%}
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Memory Game</title>
+  <link rel="stylesheet" href="{% static 'Myapp/style.css' %}">
+  <style>
+    main{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height:  70vh;
+      margin: 100px;
+      background-color: #f0f0f0;
+      border-radius: 100px;
+    }
+
+    #memory-board {
+      display: grid;
+      grid-template-columns: repeat(4, 100px);
+      gap: 10px;
+    }
+
+    #memory-case{
+        display: columns;
+    }
+
+    .card {
+      width: 100px;
+      height: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      font-weight: bold;
+      cursor: pointer;
+      background-color: #ddd;
+      color: transparent;
+      transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+      border-radius: 10px;
+    }
+    
+    #reset-button {
+        margin-top: 40px;
+        margin-left: 38%;
+        padding: 10px 20px;
+        font-size: 16px;
+        font-weight: bold;
+        background-color: #4caf50;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease-in-out;
+      }
+      
+    #reset-button:hover {
+        background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+    <header>
+        <div id="nav">
+            <img id="logo" src="https://i.ibb.co/b6DCGfb/DALL-E-2023-12-04-10-42-11-removebg-preview.png" alt="DALL-E-2023-12-04-10-42-11-removebg-preview" border="0">
+            <div id="nav_plus">
+                <ul id="nav_g">
+                    <li><a href="{% url 'home' %}">Home</a></li>
+                    <li><a href="{% url 'profils' %}">Account</a></li>
+                    <li><a href="">Classement</a></li>
+                    <li><a href="{% url 'memory' %}">Memory</a></li>
+                    <li><a href="">AI</a></li>
+                </ul>
+
+                <ul id="nav_d">
+                    <li><a href="">Sign In</a></li> 
+                    <li><a href="">Sign Up</a></li>
+                </ul>
+            </div>
+            <a href="admin"><img src="https://www.pngall.com/wp-content/uploads/5/Profile-PNG-Free-Download.png"></a>
+        </div>
+    </header>
+
+    <main id="game-zone">
+        <div id="memory-case">
+            <div id="memory-board"></div>
+            <button id="reset-button">Rejouer</button>
+        </div>
+    </main>
+
+<script>
+  // Attendre que le DOM soit chargé avant d'exécuter le script
+  document.addEventListener('DOMContentLoaded', () => {
+    // Définir les couleurs pour les cartes
+    const colors = ['#ff5733', '#33ff57', '#5733ff', '#ff33a6', '#33a6ff', '#a6ff33', '#ff3366', '#3366ff'];
+    // Dupliquer les couleurs pour créer des paires
+    const doubledColors = colors.concat(colors);
+    // Mélanger les couleurs pour positionner aléatoirement les paires sur le plateau
+    let shuffledColors = shuffleArray(doubledColors);
+    // Suivre les cartes sélectionnées
+    let selectedCards = [];
+    // Suivre le nombre de paires correspondantes
+    let matchedPairs = 0;
+
+    // Obtenir la référence du plateau de jeu dans le DOM
+    const memoryBoard = document.getElementById('memory-board');
+
+    // Initialiser le plateau de jeu
+    shuffledColors.forEach(color => {
+      const card = document.createElement('div');
+      card.classList.add('card');
+      card.dataset.color = color;
+      card.addEventListener('click', flipCard);
+      memoryBoard.appendChild(card);
+    });
+
+    // Fonction pour retourner une carte lorsqu'elle est cliquée
+    function flipCard() {
+      // Vérifier si deux cartes sont déjà sélectionnées ou si la carte a déjà été retournée
+      if (selectedCards.length < 2 && !this.classList.contains('flipped')) {
+        // Afficher la couleur de la carte
+        this.style.backgroundColor = this.dataset.color;
+        this.style.color = '#fff';
+        this.classList.add('flipped');
+        // Ajouter la carte à la liste des cartes sélectionnées
+        selectedCards.push(this);
+
+        // Si deux cartes sont sélectionnées, vérifier si elles correspondent
+        if (selectedCards.length === 2) {
+          setTimeout(checkMatch, 500);
+        }
+      }
+    }
+
+    // Fonction pour vérifier si les deux cartes sélectionnées correspondent
+    function checkMatch() {
+      const [card1, card2] = selectedCards;
+
+      // Si les couleurs correspondent, désactiver les événements de clic pour ces cartes
+      if (card1.dataset.color === card2.dataset.color) {
+        card1.removeEventListener('click', flipCard);
+        card2.removeEventListener('click', flipCard);
+        matchedPairs++;
+
+        // Si toutes les paires sont trouvées, afficher un message de félicitations
+        //if (matchedPairs === colors.length) {
+        //  alert('Félicitations ! Vous avez trouvé toutes les paires.');
+        //}
+      } else {
+        // Si les couleurs ne correspondent pas, retourner les cartes après un court délai
+        card1.style.backgroundColor = '#ddd';
+        card1.style.color = 'transparent';
+        card1.classList.remove('flipped');
+        card2.style.backgroundColor = '#ddd';
+        card2.style.color = 'transparent';
+        card2.classList.remove('flipped');
+      }
+
+      // Réinitialiser la liste des cartes sélectionnées
+      selectedCards = [];
+    }
+
+    // Fonction pour mélanger un tableau
+    function shuffleArray(array) {
+      let currentIndex = array.length, randomIndex;
+
+      while (currentIndex !== 0) {
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex--;
+
+        // Échanger les éléments à l'index actuel et à l'index aléatoire
+        [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
+      }
+
+      return array;
+    }
+    // Obtenir la référence du bouton "Rejouer" dans le DOM
+    const resetButton = document.getElementById('reset-button');
+
+    // Ajouter un écouteur d'événements au bouton "Rejouer"
+    resetButton.addEventListener('click', resetGame);
+
+    // Fonction pour réinitialiser le jeu
+    function resetGame() {
+    // Mélanger à nouveau les couleurs
+    shuffledColors = shuffleArray(doubledColors);
+    // Réinitialiser les tableaux et compteurs
+    selectedCards = [];
+    matchedPairs = 0;
+
+    // Retirer toutes les cartes actuelles du plateau
+    memoryBoard.innerHTML = '';
+
+    // Initialiser le plateau de jeu avec les nouvelles couleurs mélangées
+    shuffledColors.forEach(color => {
+        const card = document.createElement('div');
+        card.classList.add('card');
+        card.dataset.color = color;
+        card.addEventListener('click', flipCard);
+        memoryBoard.appendChild(card);
+    });
+    }
+  });
+  
+</script>
+
+</body>
+</html>

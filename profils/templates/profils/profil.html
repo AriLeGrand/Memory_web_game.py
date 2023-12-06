@@ -3,19 +3,20 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Memory Game - Account</title>
         <link rel="stylesheet" href="{% static 'Myapp/style.css' %}">
 
     </head>
     <body>
-        <head>
+        <header>
             <div id="nav">
                 <img id="logo" src="https://i.ibb.co/b6DCGfb/DALL-E-2023-12-04-10-42-11-removebg-preview.png" alt="DALL-E-2023-12-04-10-42-11-removebg-preview" border="0">
                 <div id="nav_plus">
                     <ul id="nav_g">
                         <li><a href="{% url 'home' %}">Home</a></li>
-                        <li><a href="{% url 'profil' %}">Profil</a></li>
+                        <li><a href="{% url 'profils' %}">Account</a></li>
                         <li><a href="">Classement</a></li>
-                        <li><a href="">Memory</a></li>
+                        <li><a href="{% url 'memory' %}">Memory</a></li>
                         <li><a href="">AI</a></li>
                     </ul>
 
@@ -26,6 +27,6 @@
                 </div>
                 <a href="admin"><img src="https://www.pngall.com/wp-content/uploads/5/Profile-PNG-Free-Download.png"></a>
             </div>
-        </head>
+        </header>
     </body>
 </html>

@@ -6,3 +6,6 @@ def home(request):
 
 def profil(request):
     return render(request, "Myapp/profil.html")
+
+def memory(request):
+    return render(request, "Myapp/memory.html")
