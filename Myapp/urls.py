@@ -11,4 +11,5 @@ urlpatterns = [
     path('admin', admin.site.urls),
     path("profils", include("profils.urls")),
     path("memory", include("memory.urls")),
+    path("LLR", include("LLR.urls")),
 ]

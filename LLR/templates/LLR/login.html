@@ -1,0 +1,35 @@
+{% load static%}
+{% extends "header.html"%}
+{% block pageContent %}
+
+{% block content %}
+    <br>
+    <h1>Login</h1>
+    <hr>
+    {% if form.errors %} 
+    <p>
+        Please, check your username and password
+    </p> 
+    {% else %}
+    <p>
+        Please use the following form to Login. 
+    </p>
+    {% endif%}
+    <div class ="login_form">
+        <form action="{% url 'login'%}" method ="post">
+        {{for.as_p}}
+        {% csrf_token %}  {% comment %}      for protection the request, can be used to post data back  {% endcomment %}
+        <input type="hidden" name="next" value="{{next}}" />
+        <p>
+           <p> Username :<input type ="text" name="username" placeholder ="enter a username"></p><br>
+            <br>
+            <p> Email :<input type="email" name ="email" placeholder="enter your email"></p><br>
+            <br>
+            <p> Password :<input type="text" name="password" placeholder="enter your password"></p><br>
+            <input type ="submit" value="Login">
+        </p>
+        </form>
+    </div>
+
+{% endblock%}
+{% endblock %}

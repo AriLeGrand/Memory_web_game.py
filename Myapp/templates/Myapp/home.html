@@ -7,7 +7,6 @@
         <link rel="stylesheet" href="{% static 'Myapp/style.css' %}">
     </head>
     <body>
-        {% comment %} <p>"{% static "css/style.css" %}"</p> {% endcomment %}
         <header>
 
 
@@ -25,8 +24,8 @@
                     </ul>
 
                     <ul id="nav_d">
-                        <li><a href="">Sign In</a></li> 
-                        <li><a href="">Sign Up</a></li>
+                        <li><a href="{%url 'login'%}">Sign In</a></li> 
+                        <li><a href="{%url 'register'%}">Sign Up</a></li>
                     </ul>
                 </div>
             </div>
