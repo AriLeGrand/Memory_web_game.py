@@ -6,3 +6,4 @@ def index(request):
 
 def leaderboard(request):
     return render(request, "profils/leaderboard.html")
+
