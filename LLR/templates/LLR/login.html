@@ -1,35 +1,44 @@
-{% load static%}
-{% extends "header.html"%}
-{% block pageContent %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+     
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="{% static 'Myapp/style.css' %}">  
+</head>
+<body>
+    <header>
+        <div id="nav">
+            <div id="nav_logo">
+                <img id="logo" src="https://i.ibb.co/b6DCGfb/DALL-E-2023-12-04-10-42-11-removebg-preview.png" alt="DALL-E-2023-12-04-10-42-11-removebg-preview" border="0">
+            </div>
+            <div id="nav_plus">
+                <ul id="nav_g">
+                    <li><a href="{% url 'home' %}">Home</a></li>
+                    <li><a href="{% url 'profils' %}">Account</a></li>
+                    <li><a href="{% url 'leaderboard'%}">Leaderboard</a></li>
+                    <li><a href="{% url 'memory' %}">Memory</a></li>
+                    <li><a href="">AI</a></li>
+                </ul>
 
-{% block content %}
-    <br>
-    <h1>Login</h1>
-    <hr>
-    {% if form.errors %} 
-    <p>
-        Please, check your username and password
-    </p> 
-    {% else %}
-    <p>
-        Please use the following form to Login. 
-    </p>
-    {% endif%}
-    <div class ="login_form">
-        <form action="{% url 'login'%}" method ="post">
-        {{for.as_p}}
-        {% csrf_token %}  {% comment %}      for protection the request, can be used to post data back  {% endcomment %}
-        <input type="hidden" name="next" value="{{next}}" />
-        <p>
-           <p> Username :<input type ="text" name="username" placeholder ="enter a username"></p><br>
-            <br>
-            <p> Email :<input type="email" name ="email" placeholder="enter your email"></p><br>
-            <br>
-            <p> Password :<input type="text" name="password" placeholder="enter your password"></p><br>
-            <input type ="submit" value="Login">
-        </p>
-        </form>
-    </div>
-
-{% endblock%}
-{% endblock %}
+                <ul id="nav_d">
+                    <li><a href="{%url 'login'%}">Log In</a></li> 
+                    <li><a href="{%url 'register'%}">Sign Up</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+    <center><h1>Login</h1></center>
+    <form method="post" action="{% url 'login' %}" id="form">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div id="formulaire_form">
+       <p>Username : <input type="text" name="username" placeholder="Enter your username"></p>
+       <p>Password : <input type="password" name="password" placeholder="Enter your password"></p>
+        <button type="submit">Login</button>
+        </div>
+    </form>
+</body>
+</html>

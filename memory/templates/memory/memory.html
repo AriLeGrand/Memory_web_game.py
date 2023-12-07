@@ -24,6 +24,7 @@
 
     #memory-case{
         display: columns;
+        text-align: center;
     }
 
     .card {
@@ -43,7 +44,6 @@
     
     #reset-button {
         margin-top: 40px;
-        margin-left: 38%;
         padding: 10px 20px;
         font-size: 16px;
         font-weight: bold;
@@ -65,18 +65,18 @@
         <div id="nav">
             <img id="logo" src="https://i.ibb.co/b6DCGfb/DALL-E-2023-12-04-10-42-11-removebg-preview.png" alt="DALL-E-2023-12-04-10-42-11-removebg-preview" border="0">
             <div id="nav_plus">
-                <ul id="nav_g">
-                    <li><a href="{% url 'home' %}">Home</a></li>
-                    <li><a href="{% url 'profils' %}">Account</a></li>
-                    <li><a href="">Classement</a></li>
-                    <li><a href="{% url 'memory' %}">Memory</a></li>
-                    <li><a href="">AI</a></li>
-                </ul>
+              <ul id="nav_g">
+                  <li><a href="{% url 'home' %}">Home</a></li>
+                  <li><a href="{% url 'profils' %}">Account</a></li>
+                  <li><a href="{% url 'leaderboard'%}">Leaderboard</a></li>
+                  <li><a href="{% url 'memory' %}">Memory</a></li>
+                  <li><a href="">AI</a></li>
+              </ul>
 
-                <ul id="nav_d">
-                    <li><a href="">Sign In</a></li> 
-                    <li><a href="">Sign Up</a></li>
-                </ul>
+              <ul id="nav_d">
+                  <li><a href="{%url 'login'%}">Log In</a></li> 
+                  <li><a href="{%url 'register'%}">Sign Up</a></li>
+              </ul>
             </div>
         </div>
     </header>
@@ -84,7 +84,7 @@
     <main id="game-zone">
         <div id="memory-case">
             <div id="memory-board"></div>
-            <button id="reset-button">Rejouer</button>
+            <button id="reset-button">New Game</button>
         </div>
     </main>
 
@@ -143,9 +143,9 @@
         matchedPairs++;
 
         // Si toutes les paires sont trouvées, afficher un message de félicitations
-        //if (matchedPairs === colors.length) {
-        //  alert('Félicitations ! Vous avez trouvé toutes les paires.');
-        //}
+        if (matchedPairs === colors.length) {
+          alert('Félicitations ! Vous avez trouvé toutes les paires.');
+        }
       } else {
         // Si les couleurs ne correspondent pas, retourner les cartes après un court délai
         card1.style.backgroundColor = '#ddd';

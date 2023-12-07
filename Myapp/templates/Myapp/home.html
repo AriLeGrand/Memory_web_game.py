@@ -1,4 +1,4 @@
-{% load static %}
+{%load static%}
 <html lang="fr">
     <head>
         <meta charset="UTF-8">
@@ -18,19 +18,43 @@
                     <ul id="nav_g">
                         <li><a href="{% url 'home' %}">Home</a></li>
                         <li><a href="{% url 'profils' %}">Account</a></li>
-                        <li><a href="">Classement</a></li>
+                        <li><a href="{% url 'leaderboard'%}">Leaderboard</a></li>
                         <li><a href="{% url 'memory' %}">Memory</a></li>
                         <li><a href="">AI</a></li>
                     </ul>
 
                     <ul id="nav_d">
-                        <li><a href="{%url 'login'%}">Sign In</a></li> 
+                        <li><a href="{%url 'login'%}">Log In</a></li> 
                         <li><a href="{%url 'register'%}">Sign Up</a></li>
                     </ul>
                 </div>
             </div>
-
-
+             
         </header>
+      <main id="main_block">
+              <h2>
+                Memory Rules
+              </h2>
+              <p>
+                COOLERS is a competitive memory game !<br>
+                The goal of the Memory is to find pairs. 
+              </p>
+              <br>
+                <img src="https://s5.gifyu.com/images/Si9VD.gif" alt="ezgif.com crop" border="0" />
+                <br>
+                <br>
+              <p>
+                This is the rule of the famous game Memory, also known as the Game of Pairs.<br><br>
+
+                At the beginning of the game, shuffle all the cards and arrange them in rows, face down on the table.<br><br>
+
+                Player 1 starts and turns over 2 cards, 2 possibilities:<br><br>
+
+                If the cards are not identical (it's not a pair), he turns them over and then it's Player 2's turn to turn over 2 new cards.<br>
+                On the other hand, if the 2 cards are identical, it's a pair! The player keeps the cards and has the right to play again...<br><br>
+
+                When players have found all the pairs in the game, the game is over. The player with the most cards wins!
+             </p>
+       </main>
     </body>
 </html>
