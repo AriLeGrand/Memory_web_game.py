@@ -1,16 +1,19 @@
-{% load static %}
+{%load static%}
 <html lang="fr">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Memory Game - Account</title>
+        <title>Memory Game - Home</title>
         <link rel="stylesheet" href="{% static 'Myapp/style.css' %}">
-
     </head>
     <body>
         <header>
+
+
             <div id="nav">
-                <img id="logo" src="https://i.ibb.co/b6DCGfb/DALL-E-2023-12-04-10-42-11-removebg-preview.png" alt="DALL-E-2023-12-04-10-42-11-removebg-preview" border="0">
+                <div id="nav_logo">
+                    <img id="logo" src="https://i.ibb.co/b6DCGfb/DALL-E-2023-12-04-10-42-11-removebg-preview.png" alt="DALL-E-2023-12-04-10-42-11-removebg-preview" border="0">
+                </div>
                 <div id="nav_plus">
                     <ul id="nav_g">
                         <li><a href="{% url 'home' %}">Home</a></li>
@@ -26,12 +29,12 @@
                     </ul>
                 </div>
             </div>
+             
         </header>
+
         <main id="main_block_">
+            <h2>Leaderboard</h2>
             username: {{username}}<br>
-            email: {{email}}
-            <hr><br><br>
-            historique: {{historique}}
             <br><br><br><br>
         </main>
     </body>
