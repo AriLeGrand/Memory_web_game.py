@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Memory Game - Login</title>
     <link rel="stylesheet" href="{% static 'Myapp/style.css' %}">  
 </head>
 <body>
@@ -30,15 +30,26 @@
             </div>
         </div>
     </header>
-    <center><h1>Login</h1></center>
-    <form method="post" action="{% url 'login' %}" id="form">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <div id="formulaire_form">
-       <p>Username : <input type="text" name="username" placeholder="Enter your username"></p>
-       <p>Password : <input type="password" name="password" placeholder="Enter your password"></p>
-        <button type="submit">Login</button>
-        </div>
-    </form>
+    {% block content %}
+    <div id="form">
+        <h2>Login</h2>
+        <form method=POST class="form" action="{% url 'home' %}">
+            {% csrf_token %}
+            <div class="mb-3">
+            <label for="id_username" class="form-label">Username:</label>
+            <input type="text" name="username" id="id_username" class="form-control" required>
+            </div>
+            <br>
+            <div class="mb-3">
+            <label for="id_password" class="form-label">Password:</label>
+            <input type="password" name="password" id="id_password" class="form-control" required>
+            </div>
+            <br>
+            <div class="text-center">
+            <button type="submit" class="btn btn-primary">Connexion</button>
+            </div>
+        </form>
+    </div>
+    {% endblock %}
 </body>
 </html>

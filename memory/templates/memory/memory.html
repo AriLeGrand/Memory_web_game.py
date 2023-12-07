@@ -89,23 +89,25 @@
     </main>
 
 <script>
-  // Attendre que le DOM soit chargé avant d'exécuter le script
+  // Wait for the DOM to load before running the script
   document.addEventListener('DOMContentLoaded', () => {
-    // Définir les couleurs pour les cartes
+   // Set colors for cards
     const colors = ['#B31312', '#161A30', '#83A2FF', '#557C55', '#F4CE14', '#CBADBD', '#9F866D', '#5D5B91'];
-    // Dupliquer les couleurs pour créer des paires
+   // Duplicate colors to create pairs
     const doubledColors = colors.concat(colors);
-    // Mélanger les couleurs pour positionner aléatoirement les paires sur le plateau
+   // Mix colors to randomly position pairs on the board
     let shuffledColors = shuffleArray(doubledColors);
-    // Suivre les cartes sélectionnées
+   // Follow the selected maps
     let selectedCards = [];
-    // Suivre le nombre de paires correspondantes
+// Follow the number of matching pairs
     let matchedPairs = 0;
+     // Follow the player’s score
+    let score = 0;
 
-    // Obtenir la référence du plateau de jeu dans le DOM
+    // Get the game board reference in the DOM
     const memoryBoard = document.getElementById('memory-board');
 
-    // Initialiser le plateau de jeu
+    // Initialize the game board
     shuffledColors.forEach(color => {
       const card = document.createElement('div');
       card.classList.add('card');
@@ -114,53 +116,55 @@
       memoryBoard.appendChild(card);
     });
 
-    // Fonction pour retourner une carte lorsqu'elle est cliquée
+     // Function to return a card when clicked
     function flipCard() {
-      // Vérifier si deux cartes sont déjà sélectionnées ou si la carte a déjà été retournée
+      // Check if two cards are already selected or if the card has already been returned
       if (selectedCards.length < 2 && !this.classList.contains('flipped')) {
-        // Afficher la couleur de la carte
+        // Display the map color
         this.style.backgroundColor = this.dataset.color;
         this.style.color = '#fff';
         this.classList.add('flipped');
-        // Ajouter la carte à la liste des cartes sélectionnées
+        // Add the card to the list of selected cards
         selectedCards.push(this);
 
-        // Si deux cartes sont sélectionnées, vérifier si elles correspondent
+        // If two cards are selected, check if they match
         if (selectedCards.length === 2) {
           setTimeout(checkMatch, 500);
         }
       }
     }
 
-    // Fonction pour vérifier si les deux cartes sélectionnées correspondent
+    // Function to check if the two selected cards match
     function checkMatch() {
       const [card1, card2] = selectedCards;
 
-      // Si les couleurs correspondent, désactiver les événements de clic pour ces cartes
+      // If colors match, disable click events for these cards
       if (card1.dataset.color === card2.dataset.color) {
         card1.removeEventListener('click', flipCard);
         card2.removeEventListener('click', flipCard);
         matchedPairs++;
+        score += 20;
 
-        // Si toutes les paires sont trouvées, afficher un message de félicitations
+        // If all pairs are found, display a congratulatory message
         if (matchedPairs === colors.length) {
-          alert('Félicitations ! Vous avez trouvé toutes les paires.');
+          alert('Félicitations ! Vous avez trouvé toutes les paires. Le score est de : ' + score); // On felicte le joeur et lui annonce son score
         }
       } else {
-        // Si les couleurs ne correspondent pas, retourner les cartes après un court délai
+        // If the colors do not match, return the cards after a short delay
         card1.style.backgroundColor = '#ddd';
         card1.style.color = 'transparent';
         card1.classList.remove('flipped');
         card2.style.backgroundColor = '#ddd';
         card2.style.color = 'transparent';
         card2.classList.remove('flipped');
+        score -= 5;
       }
 
-      // Réinitialiser la liste des cartes sélectionnées
+      // Reset the list of selected cards
       selectedCards = [];
     }
 
-    // Fonction pour mélanger un tableau
+   // Function to mix a table
     function shuffleArray(array) {
       let currentIndex = array.length, randomIndex;
 
@@ -168,30 +172,30 @@
         randomIndex = Math.floor(Math.random() * currentIndex);
         currentIndex--;
 
-        // Échanger les éléments à l'index actuel et à l'index aléatoire
+        // Exchange items with current and random index
         [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
       }
 
       return array;
     }
-    // Obtenir la référence du bouton "Rejouer" dans le DOM
+   // Get the "Replay" button reference in the DOM
     const resetButton = document.getElementById('reset-button');
 
-    // Ajouter un écouteur d'événements au bouton "Rejouer"
-    resetButton.addEventListener('click', resetGame);
+// Add an event listener to the "Replay" button    
+  resetButton.addEventListener('click', resetGame);
 
-    // Fonction pour réinitialiser le jeu
+    // Function to reset the game
     function resetGame() {
-    // Mélanger à nouveau les couleurs
+    // Mix colours again
     shuffledColors = shuffleArray(doubledColors);
-    // Réinitialiser les tableaux et compteurs
+    // Reset tables and counters
     selectedCards = [];
     matchedPairs = 0;
 
-    // Retirer toutes les cartes actuelles du plateau
+    // Remove all current boards from the tray
     memoryBoard.innerHTML = '';
 
-    // Initialiser le plateau de jeu avec les nouvelles couleurs mélangées
+    // Initialize the game board with the new mixed colors
     shuffledColors.forEach(color => {
         const card = document.createElement('div');
         card.classList.add('card');

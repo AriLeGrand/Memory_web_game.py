@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Memory Game - Sign Up</title>
     <link rel="stylesheet" href="{% static 'Myapp/style.css' %}">  
 </head>
 <body>
@@ -30,17 +30,14 @@
             </div>
         </div>
     </header>
-{% block content %}
-    <center><h1>Register</h1></center>
-    <form method="post" action="{% url 'register' %}">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <div id="formulaire_form">
-        <p> you can create a account ! </p>
-        <p>Username : <input type="text" name="username" placeholder="Enter your username"></p>
-       <p>Email: <input type="email" name="email" placeholder="Enter your email"></p>
-       <p>Password : <input type="password" name="password" placeholder="Enter your password"></p>
-        <button type="submit">Register</button>
-        </div>
-    </form>
-{% endblock %}
+
+    <div id="form">
+        {% block content %}
+        <h2>Sign Up</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Register</button>
+        </form>
+        {% endblock %}
+    </div>
