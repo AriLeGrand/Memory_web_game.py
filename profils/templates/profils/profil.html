@@ -5,7 +5,31 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Memory Game - Account</title>
         <link rel="stylesheet" href="{% static 'Myapp/style.css' %}">
-
+        <style>
+            main#main_block_{
+                height:  70vh;
+                margin: 100px;
+                background-color: #f0f0f0;
+                border-radius: 100px;
+                text-align: center;
+                color: black;
+            }
+            #logout-button {
+                margin-top: 40px;
+                padding: 10px 20px;
+                font-size: 16px;
+                font-weight: bold;
+                background-color: #4caf50;
+                color: #fff;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                transition: background-color 0.3s ease-in-out;
+              }
+              #logout-button:hover {
+                background-color: #45a049;
+            }
+        </style>
     </head>
     <body>
         <header>
@@ -28,11 +52,18 @@
             </div>
         </header>
         <main id="main_block_">
-            username: {{username}}<br>
-            email: {{email}}
-            <hr><br><br>
-            historique: {{historique}}
-            <br><br><br><br>
+            username : {{user.username}} <br>
+            email: {{user.email}}
+            <hr>
+            {% for entry in historical_score_data %}
+                <tr>
+                    <td>user : {{ entry.user.username }}  -  </td>
+                    <td>score : {{ entry.score }}  -  </td>
+                    <td>date : {{ entry.time }}</td>
+                </tr><br>
+            {% endfor %}
+            <a href="{% url 'logout' %}"><button id="logout-button">Log Out</button></a>
         </main>
+        
     </body>
 </html>

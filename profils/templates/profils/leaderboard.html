@@ -34,8 +34,13 @@
 
         <main id="main_block_">
             <h2>Leaderboard</h2>
-            username: {{username}}<br>
-            <br><br><br><br>
+            {% for entry in leaderboard_data %}
+                <tr>
+                    <td>user : {{ entry.user.username }}  -  </td>
+                    <td>score : {{ entry.score }}  -  </td>
+                    <td>date : {{ entry.time }}</td>
+                </tr><br>
+            {% endfor %}
         </main>
     </body>
 </html>
