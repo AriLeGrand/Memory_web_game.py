@@ -85,21 +85,26 @@
         <div id="memory-case">
             <div id="memory-board"></div>
             <button id="reset-button">New Game</button>
+            <form id="gameResultForm" method="post" action="{% url 'ParseGameResults' %}" style="display: none;">
+              {% csrf_token %}
+              <input type="hidden" id="totalPoints" name="totalPoints" value="" />
+              <button type="submit">Submit</button>
+            </form>
         </div>
     </main>
 
 <script>
   // Wait for the DOM to load before running the script
   document.addEventListener('DOMContentLoaded', () => {
-   // Set colors for cards
+    // Set colors for cards
     const colors = ['#B31312', '#161A30', '#83A2FF', '#557C55', '#F4CE14', '#CBADBD', '#9F866D', '#5D5B91'];
-   // Duplicate colors to create pairs
+    // Duplicate colors to create pairs
     const doubledColors = colors.concat(colors);
-   // Mix colors to randomly position pairs on the board
+    // Mix colors to randomly position pairs on the board
     let shuffledColors = shuffleArray(doubledColors);
-   // Follow the selected maps
+    // Follow the selected maps
     let selectedCards = [];
-// Follow the number of matching pairs
+    // Follow the number of matching pairs
     let matchedPairs = 0;
      // Follow the player’s score
     let score = 0;
@@ -147,7 +152,9 @@
 
         // If all pairs are found, display a congratulatory message
         if (matchedPairs === colors.length) {
-          alert('Félicitations ! Vous avez trouvé toutes les paires. Le score est de : ' + score); // On felicte le joeur et lui annonce son score
+          alert('Félicitations ! Vous avez trouvé toutes les paires. Le score est de : ' + score);
+          document.getElementById('totalPoints').value = 0 // ton calcul des points
+          document.getElementById('gameResultForm').submit(); // On felicte le joeur et lui annonce son score
         }
       } else {
         // If the colors do not match, return the cards after a short delay
@@ -181,7 +188,7 @@
    // Get the "Replay" button reference in the DOM
     const resetButton = document.getElementById('reset-button');
 
-// Add an event listener to the "Replay" button    
+  // Add an event listener to the "Replay" button    
   resetButton.addEventListener('click', resetGame);
 
     // Function to reset the game
@@ -204,6 +211,7 @@
         memoryBoard.appendChild(card);
     });
     }
+    
   });
   
 </script>

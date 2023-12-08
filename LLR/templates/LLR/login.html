@@ -33,7 +33,7 @@
     {% block content %}
     <div id="form">
         <h2>Login</h2>
-        <form method=POST class="form" action="{% url 'home' %}">
+        <form method=POST class="form" action="{% url 'profils' %}">
             {% csrf_token %}
             <div class="mb-3">
             <label for="id_username" class="form-label">Username:</label>

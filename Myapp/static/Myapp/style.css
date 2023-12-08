@@ -102,7 +102,7 @@ main#main_block img{
 main#main_block_{
     background-color: #31304D;
     color:#F0ECE5;
-    flex-direction: row;
+    flex-direction: column;
     margin: 30px;
     padding: 15px;
     border-radius: 15px;
